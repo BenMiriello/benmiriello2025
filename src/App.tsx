@@ -2,30 +2,26 @@ import './index.css'
 import { linkedinSvgPath } from './svgPaths';
 import grabMeetingCollage from './assets/grabameetingcollage.jpg'
 import riddlemethisBG from './assets/riddlemethis-screenshot.png'
+import Card, { type CardProps } from './components/Card';
 
-const cards = [
-    {
-      id: 1,
-      title: "Riddle Me This",
-      description: "Search in riddles, or answer in riddles",
-      image: riddlemethisBG,
-      alt: 'A screenshot of a website containing a riddle from The Hobbit which begins: This thing all things devours...'
-    },
-    {
-      id: 2,
-      title: "Grab a Meeting",
-      description: "An online support group platform",
-      image: grabMeetingCollage,
-      alt: 'Grab a Meeting site collage'
-    },
-    // {
-    //   id: 3,
-    //   title: "Project Three",
-    //   description: "",
-    //   image: null,
-    //   alt: ''
-    // },
-  ]
+const cards: CardProps[]  = [
+  {
+    id: 1,
+    title: "Riddle Me This",
+    description: "Search in riddles, answer in riddles",
+    image: riddlemethisBG,
+    alt: 'A screenshot of a website containing a riddle from The Hobbit which begins: This thing all things devours...',
+    link: 'https://riddlemethis.io',
+    linkDisplayText: 'Visit Site'
+  },
+  {
+    id: 2,
+    title: "Grab a Meeting",
+    description: "An online support group startup",
+    image: grabMeetingCollage,
+    alt: 'Grab a Meeting site collage'
+  },
+]
 
 function App() {
   return (
@@ -53,26 +49,15 @@ function App() {
       <div className='flex-auto overflow-hidden'>
         <div className="h-full flex flex-col md:flex-row items-center md:items-stretch gap-4 overflow-y-auto md:overflow-x-auto md:overflow-y-hidden p-4">
           {cards.map((card) => (
-                <div 
-                  key={card.id} 
-                  className="rounded-lg shadow-md flex-shrink-0 w-full h-80 md:w-[52rem] md:h-auto md:aspect-[5/4] relative overflow-hidden bg-stone-500"
-                  style={{
-                    backgroundImage: card.image ? `url(${card.image})` : undefined,
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center'
-                  }}
-                >
-                  <div className="absolute inset-0 bg-black/60"></div>
-
-                  {(card.title || card.description) && (
-                    <div className="absolute bottom-0 left-0 right-0 p-6 z-10">
-                      <div className="text-white">
-                        {card.title && <h3 className="text-xl font-bold mb-2">{card.title}</h3>}
-                        {card.description && <p className="text-sm">{card.description}</p>}
-                      </div>
-                    </div>
-                  )}
-                </div>
+            <Card
+              id={card.id}
+              title={card.title}
+              description={card.description}
+              image={card.image}
+              alt={card.alt}
+              link={card.link}
+              linkDisplayText={card.linkDisplayText}
+            />
           ))}
         </div>
       </div>
