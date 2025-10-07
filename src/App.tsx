@@ -2,11 +2,21 @@ import './index.css'
 import { linkedinSvgPath } from './svgPaths';
 import grabMeetingCollage from './assets/grabameetingcollage.jpg'
 import riddlemethisBG from './assets/riddlemethis-screenshot.png'
+import storymarkBG from './assets/storymark-bg.png';
 import Card, { type CardProps } from './components/Card';
 
 const cards: CardProps[]  = [
   {
     id: 1,
+    title: "Storymark",
+    description: "A declarative site builder",
+    image: storymarkBG,
+    alt: 'Storymark site screenshot',
+    link: 'https://storymark-site.pages.dev/',
+    linkDisplayText: 'Visit Site'
+  },
+  {
+    id: 2,
     title: "Riddle Me This",
     description: "Search in riddles, answer in riddles",
     image: riddlemethisBG,
@@ -15,7 +25,7 @@ const cards: CardProps[]  = [
     linkDisplayText: 'Visit Site'
   },
   {
-    id: 2,
+    id: 3,
     title: "Grab a Meeting",
     description: "An online support group startup",
     image: grabMeetingCollage,
