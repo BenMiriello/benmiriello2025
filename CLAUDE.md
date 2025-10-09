@@ -1,0 +1,1 @@
+- never just run 'npm run dev' - always use your own port when running the server so as to not interfere with my server running - pick one 5 more than whatever the automatic server port number is
