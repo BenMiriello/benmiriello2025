@@ -61,7 +61,7 @@ const photoCollectionsInput: PhotoCollectionInput[] = [
       { src: '/photos/alps/large/IMG_7343.jpg' },
       { src: '/photos/alps/large/IMG_7416.jpg' },
       { src: '/photos/alps/large/IMG_7451.jpg' },
-      { src: '/photos/alps/large/IMG_7464.jpg' }
+      { src: '/photos/alps/large/IMG_7464.jpg' },
     ]
   },
   {
@@ -84,7 +84,7 @@ const photoCollectionsInput: PhotoCollectionInput[] = [
       { src: '/photos/desert/large/010.jpg' },
       { src: '/photos/desert/large/011.jpg' },
       { src: '/photos/desert/large/014.jpg' },
-      { src: '/photos/desert/large/016.jpg' }
+      { src: '/photos/desert/large/016.jpg' },
     ]
   },
   {
@@ -95,13 +95,14 @@ const photoCollectionsInput: PhotoCollectionInput[] = [
     coverImage: '/photos/rome/large/004.jpg',
     alt: 'Rome photography collection cover',
     photos: [
-      { src: '/photos/rome/large/001.jpg' },
-      { src: '/photos/rome/large/002.jpg' },
-      { src: '/photos/rome/large/003.jpg' },
       { src: '/photos/rome/large/004.jpg' },
-      { src: '/photos/rome/large/005.jpg' },
       { src: '/photos/rome/large/006.jpg' },
-      { src: '/photos/rome/large/007.jpg' }
+      { src: '/photos/rome/large/001.jpg' },
+      { src: '/photos/rome/large/007.jpg' },
+      { src: '/photos/rome/large/002.jpg' },
+      { src: '/photos/rome/large/IMG_8044.JPG' },
+      { src: '/photos/rome/large/005.jpg' },
+      { src: '/photos/rome/large/003.jpg' },
     ]
   },
 ]

@@ -4,28 +4,18 @@ import { useState, useEffect } from 'react';
 import Header from './components/layout/Header';
 import HomePage from './pages/HomePage';
 import PhotoViewerPage from './pages/PhotoViewerPage';
-import { photoCollections } from './data/photoCollections';
 import type { NavigationSection } from './data/types';
 
 function AppContent() {
   const location = useLocation();
   const navigate = useNavigate();
   const [activeSection, setActiveSection] = useState<NavigationSection>('code');
-  const [expandedTitle, setExpandedTitle] = useState<string | undefined>(undefined);
 
   useEffect(() => {
     if (location.pathname === '/photos' || location.pathname.startsWith('/photos/')) {
       setActiveSection('photos');
-      const collectionId = location.pathname.split('/photos/')[1];
-      if (collectionId) {
-        const collection = photoCollections.find(c => c.id === collectionId);
-        setExpandedTitle(collection?.title);
-      } else {
-        setExpandedTitle(undefined);
-      }
     } else if (location.pathname === '/') {
       setActiveSection('code');
-      setExpandedTitle(undefined);
     }
   }, [location.pathname]);
 
