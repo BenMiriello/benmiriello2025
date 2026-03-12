@@ -1,5 +1,5 @@
 import './index.css';
-import { BrowserRouter as Router, Routes, Route, useLocation, useNavigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation, useNavigate, Outlet } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import Header from './components/layout/Header';
 import HomePage from './pages/HomePage';
@@ -30,35 +30,36 @@ function AppContent() {
     }
   };
 
-  return (
-    <div className='min-h-screen flex flex-col bg-navy'>
+  return (  
+    <div className="flex flex-col h-screen bg-navy"> 
       <Header
         activeSection={activeSection}
         onSectionChange={handleSectionChange}
       />
-
-      <Routes>
-        <Route
-          path="/"
-          element={<HomePage activeSection="code" />}
-        />
-        <Route
-          path="/code/:projectId"
-          element={<CodeProjectPage />}
-        />
-        <Route
-          path="/photos"
-          element={<HomePage activeSection="photos" />}
-        />
-        <Route
-          path="/photos/:collectionId"
-          element={<PhotoAlbumPage />}
-        />
-        <Route
-          path="/photos/:collectionId/:photoId"
-          element={<PhotoViewerPage />}
-        />
-      </Routes>
+      <main className="flex-1 flex flex-col min-h-0">
+        <Routes>
+          <Route
+            path="/"
+            element={<HomePage activeSection="code" />}
+          />
+          <Route
+            path="/code/:projectId"
+            element={<CodeProjectPage />}
+          />
+          <Route
+            path="/photos"
+            element={<HomePage activeSection="photos" />}
+          />
+          <Route
+            path="/photos/:collectionId"
+            element={<PhotoAlbumPage />}
+          />
+          <Route
+            path="/photos/:collectionId/:photoId"
+            element={<PhotoViewerPage />}
+          />
+        </Routes>
+      </main>
     </div>
   );
 }

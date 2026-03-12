@@ -18,7 +18,7 @@ const CodeCard = ({ project }: CodeCardProps) => {
 
   return (
     <div
-      className={`rounded-lg shadow-md flex-shrink-0 w-full h-80 md:w-[52rem] md:h-auto md:aspect-[5/4] relative overflow-hidden bg-stone-500 ${project.expandable ? 'cursor-pointer' : ''}`}
+      className={`rounded-xl shadow-md flex-shrink-0 w-full h-80 md:w-[52rem] md:h-auto md:aspect-[5/4] hover:scale-102 transition-all  relative overflow-hidden bg-stone-500 ${project.expandable ? 'cursor-pointer' : ''}`}
       style={{
         backgroundImage: project.image ? `url(${project.image})` : undefined,
         backgroundSize: 'cover',

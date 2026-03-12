@@ -9,18 +9,23 @@ interface HomePageProps {
 }
 
 const HomePage = ({ activeSection }: HomePageProps) => {
+  const items = activeSection === 'code' ? projects : photoCollections;
+  const Card = activeSection === 'code' ? CodeCard : PhotoCard;
+
   return (
-    <div className='flex-auto overflow-hidden'>
-      <div className="h-full flex flex-col md:flex-row items-center md:items-stretch gap-4 overflow-y-auto md:overflow-x-auto md:overflow-y-hidden p-4">
-        {activeSection === 'code' ? (
-          projects.map((project) => (
-            <CodeCard key={project.id} project={project} />
-          ))
-        ) : (
-          photoCollections.map((collection) => (
-            <PhotoCard key={collection.id} collection={collection} />
-          ))
-        )}
+    <div className="flex-1 min-h-0">
+      <div className="
+        h-full flex flex-col gap-6 p-4 overflow-y-auto
+        md:flex-row md:items-center md:overflow-x-auto md:overflow-y-hidden
+        md:snap-x md:snap-mandatory scroll-smooth
+        md:px-[calc(50%-160px)]
+      ">
+        {items.map((item) => (
+          <div key={item.id} className="flex-none md:snap-center">
+            {/* @ts-ignore - Dynamic component assignment */}
+            <Card {...{ [activeSection === 'code' ? 'project' : 'collection']: item }} />
+          </div>
+        ))}
       </div>
     </div>
   );
