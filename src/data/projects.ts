@@ -2,15 +2,15 @@ import type { ProjectCard } from './types';
 import grabMeetingCollage from '../assets/grabameetingcollage.jpg';
 import riddlemethisBG from '../assets/riddlemethis-screenshot.png';
 import storymarkBG from '../assets/storymark-bg.png';
-import narrativeIntelligenceOdyssey from '../assets/narrative-intelligence-odyssey.png';
+import narrativeIntelligenceOdyssey2 from '../assets/narrative-intelligence-odyssey-2.png';
 
 export const projects: ProjectCard[] = [
   {
     id: 1,
     type: 'project',
     title: "Narrative Intelligence",
-    description: "A platform for narrative analysis and context-aware media generation with graph intelligence",
-    image: narrativeIntelligenceOdyssey,
+    description: "Currently building a platform for narrative analysis with context-aware media generation and graph intelligence",
+    image: narrativeIntelligenceOdyssey2,
     alt: 'A graph of all characters in the Odyssey and their relationships to each other',
     // expandable: true,
     // content: ``
@@ -19,7 +19,7 @@ export const projects: ProjectCard[] = [
     id: 2,
     type: 'project',
     title: "Storymark",
-    description: "A declarative site builder",
+    description: "A declarative site builder to streamline and merge writing and layout design",
     image: storymarkBG,
     alt: 'Storymark site screenshot',
     link: 'https://storymark-site.pages.dev/',
@@ -35,7 +35,7 @@ Key features include declarative syntax, component-based architecture, and insta
     id: 3,
     type: 'project',
     title: "Riddle Me This",
-    description: "Search in riddles, answer in riddles",
+    description: "Search in riddles, answer in riddles, a search engine that won't give straight answers",
     image: riddlemethisBG,
     alt: 'A screenshot of a website containing a riddle from The Hobbit which begins: This thing all things devours...',
     link: 'https://riddlemethis.io',
@@ -51,7 +51,7 @@ Built as an exploration of alternative interfaces for web search and AI-powered 
     id: 4,
     type: 'project',
     title: "Grab a Meeting",
-    description: "An online support group startup",
+    description: "An online support group platform for organizing and hosting meetings",
     image: grabMeetingCollage,
     alt: 'Grab a Meeting site collage',
     expandable: true,
