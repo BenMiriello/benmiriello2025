@@ -1,5 +1,10 @@
 @import "tailwindcss";
 
+@theme {
+  --color-navy: #0d1419;
+  --color-navy-dark: #07090d;
+}
+
 .major-mono-display-regular {
   font-family: "Major Mono Display", monospace;
   font-weight: 400;

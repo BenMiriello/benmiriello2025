@@ -9,7 +9,7 @@ interface HeaderProps {
 
 const Header = ({ activeSection, onSectionChange }: HeaderProps) => {
   return (
-    <div className="w-full bg-stone-900 mt-4 shadow-md flex flex-row items-center">
+    <div className="w-full bg-navy-dark mt-4 shadow-md flex flex-row items-center">
       <header className="py-4 px-8 pl-12">
         <h1 className="text-orange-400 text-2xl tracking-widest major-mono-display-regular">
           Ben Miriello

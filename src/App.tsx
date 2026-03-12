@@ -4,6 +4,8 @@ import { useState, useEffect } from 'react';
 import Header from './components/layout/Header';
 import HomePage from './pages/HomePage';
 import PhotoViewerPage from './pages/PhotoViewerPage';
+import PhotoAlbumPage from './pages/PhotoAlbumPage';
+import CodeProjectPage from './pages/CodeProjectPage';
 import type { NavigationSection } from './data/types';
 
 function AppContent() {
@@ -29,7 +31,7 @@ function AppContent() {
   };
 
   return (
-    <div className='min-h-screen flex flex-col bg-stone-800'>
+    <div className='min-h-screen flex flex-col bg-navy'>
       <Header
         activeSection={activeSection}
         onSectionChange={handleSectionChange}
@@ -41,12 +43,16 @@ function AppContent() {
           element={<HomePage activeSection="code" />}
         />
         <Route
+          path="/code/:projectId"
+          element={<CodeProjectPage />}
+        />
+        <Route
           path="/photos"
           element={<HomePage activeSection="photos" />}
         />
         <Route
           path="/photos/:collectionId"
-          element={<HomePage activeSection="photos" />}
+          element={<PhotoAlbumPage />}
         />
         <Route
           path="/photos/:collectionId/:photoId"
