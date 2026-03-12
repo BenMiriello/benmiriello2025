@@ -1,5 +1,5 @@
 import './index.css';
-import { BrowserRouter as Router, Routes, Route, useLocation, useNavigate, Outlet } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import Header from './components/layout/Header';
 import HomePage from './pages/HomePage';
