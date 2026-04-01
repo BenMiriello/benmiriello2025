@@ -8,10 +8,12 @@ export const projects: ProjectCard[] = [
   {
     id: 1,
     type: 'project',
-    title: "Narrative Intelligence",
-    description: "A platform for narrative analysis with context-aware media generation and graph intelligence.",
+    title: "Noetic",
+    description: "A platform for narrative analysis with  graph intelligence, causal reasoning, and context-aware media generation.",
     image: narrativeIntelligenceOdyssey2,
     alt: 'A graph of all characters in the Odyssey and their relationships to each other',
+    link: 'https://writenoetic.com',
+    linkDisplayText: 'Visit Site',
     // expandable: true,
     // content: ``
   },
