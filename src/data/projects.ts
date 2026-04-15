@@ -10,7 +10,7 @@ export const projects: ProjectCard[] = [
     id: 0,
     type: 'project',
     title: "Overview Effect",
-    description: "Live lightning strikes on a 3D globe, powered by real atmospheric data and physics-based simulation",
+    description: "Live lightning strikes on a 3D globe, powered by live weather data and physics-based simulations",
     image: overviewEffectScreenshot,
     alt: 'A 3D globe showing Earth from space with real-time lightning strike data',
     link: 'https://overview-effect.io',
