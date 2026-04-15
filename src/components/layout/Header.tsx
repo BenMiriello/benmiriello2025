@@ -1,6 +1,6 @@
 import { linkedinSvgPath } from '../../svgPaths';
 import Navigation from './Navigation';
-import profilePhoto from '../../assets/profile.jpg';
+import profilePhoto from '../../assets/profile.png';
 
 interface HeaderProps {
   activeSection: 'code' | 'photos';
