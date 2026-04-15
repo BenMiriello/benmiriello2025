@@ -3,8 +3,43 @@ import grabMeetingCollage from '../assets/grabameetingcollage.jpg';
 import riddlemethisBG from '../assets/riddlemethis-screenshot.png';
 import storymarkBG from '../assets/storymark-bg.png';
 import narrativeIntelligenceOdyssey2 from '../assets/narrative-intelligence-odyssey-2.png';
+import overviewEffectScreenshot from '../assets/overview-effect-screenshot.png';
 
 export const projects: ProjectCard[] = [
+  {
+    id: 0,
+    type: 'project',
+    title: "Overview Effect",
+    description: "Live lightning strikes on a 3D globe, powered by real atmospheric data and physics-based simulation",
+    image: overviewEffectScreenshot,
+    alt: 'A 3D globe showing Earth from space with real-time lightning strike data',
+    link: 'https://overview-effect.io',
+    linkDisplayText: 'Visit Site',
+    expandable: true,
+    content: `Overview Effect is an exploration in learning about how complex natural phenomena actually work by simulating them. The initial focus was on simulating lightning through all phases:
+  0. Simulating the moisture, charge, and ionization in the clouds and atmosphere in a live evolving simulation.
+  1. Stepped leader: The dim, branching network which searches for a path to the ground, pausing between steps while charge builds. This phase branches extensively because the tip can only "sense" local field conditions, exploring stochastically.
+  2. Return stroke: The visible flash. Not current traveling down but a potential wave traveling up from the ground connection point at ~1/3 the speed of light. Orders of magnitude brighter than the leader.
+  3. Subsequent strokes / flickering — most flashes are 3–5 strokes. After the first return stroke, a dart leader (continuous, not stepped, 10x faster) reruns the existing channel, triggering another return stroke. The ~40–100ms interstroke interval is what creates the visible flicker.
+  4. Fade — Channel cools, glow dims, ionization dissapates, ground and cloud charges recalibrate after making connection.
+
+These strikes play out in real-time lightning strike positions on a 3D globe including:
+- Tiled progressive loading of varying levels of ground detail with quick loading, storage and state management for optimized performance.
+- Day and night tiles with a gradual terminator line.
+- Atmosphere with dusk lighting effect if viewed from the right angle.
+- Cloud cover based on real-time cloud data, with shadows and varying heights depending on zoom level.
+
+Live weather simulations display on the globe in different layers including:
+- Cloud cover
+- Precipitation
+- Temperature
+- Wind speed and direction
+- History replay for all layers when data provides
+
+View the moon close up, with the earth sun and moon all in correct real-time relative positions and lighting.
+
+Stack: React 19, TypeScript, Three.js, @react-three/fiber, react-globe.gl, Vite. Server: Node.js with WebSocket relay.`
+  },
   {
     id: 1,
     type: 'project',
