@@ -1,5 +1,6 @@
 import { linkedinSvgPath } from '../../svgPaths';
 import Navigation from './Navigation';
+import profilePhoto from '../../assets/profile.jpg';
 
 interface HeaderProps {
   activeSection: 'code' | 'photos';
@@ -10,7 +11,12 @@ interface HeaderProps {
 const Header = ({ activeSection, onSectionChange }: HeaderProps) => {
   return (
     <div className="w-full bg-navy-dark mt-4 shadow-md flex flex-row items-center">
-      <header className="py-4 px-8 pl-12">
+      <header className="py-4 px-8 pl-12 flex flex-row items-center gap-4">
+        <img
+          src={profilePhoto}
+          alt="Ben Miriello"
+          className="w-10 h-10 rounded-full object-cover object-top"
+        />
         <h1 className="text-orange-400 text-2xl tracking-widest major-mono-display-regular">
           Ben Miriello
         </h1>
