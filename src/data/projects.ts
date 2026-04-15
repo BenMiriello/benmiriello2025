@@ -7,6 +7,34 @@ import overviewEffectScreenshot from '../assets/overview-effect-screenshot.png';
 
 export const projects: ProjectCard[] = [
   {
+    id: 1,
+    type: 'project',
+    title: "Noetic",
+    description: "Narrative intelligence for writers. Reads your manuscript, builds a knowledge graph of characters and events, and lets you navigate the structure through graph, timeline, and editor views.",
+    image: narrativeIntelligenceOdyssey2,
+    alt: 'A graph of all characters in the Odyssey and their relationships to each other',
+    link: 'https://writenoetic.com',
+    linkDisplayText: 'Visit Site',
+    expandable: true,
+    content: `Noetic is what I'm currently building — a narrative intelligence platform for writers working on complex, long-form, or nonlinear projects.
+
+This is based on my history as a writer and editor, and my experience with AI tools. It's becoming more possible now to work in a creative flow state, letting the AI handle structure and organization. But across large documents this work becomes more difficult quickly. And such tools are just not designed for writing and narrative work. As I explored what was possible, a whole spectrum of opportunities began opening up that I could only explore by building it.
+
+Start by uploading or pasting your text. A narrative analysis pipeline reads it, extracting every character, place, and event, anchoring each mention to an exact position in the text, and building a knowledge graph of how they connect. The model updates as you write.
+
+You view that model through a suite of synchronized views. In the text editor, entity names highlight in contextual colors — each character, place, and event tied to who they are in the graph. Switch to graph view and the same model renders as an interactive force-directed network. The timeline view is based on NLE (non-linear editor) interfaces you'd usually find in a DAW or video editing software. It displays the document or timeline horizontal tracks, showing events in the order they're written or in chronological order. Structures in the document and story are visible through different layers such as positional mentions, a semantic embedding similarity heat map, timelines and character arcs. Character portraits are generated with full awareness of the extracted character attributes — not a generic prompt, but one the system builds from what it's already read.
+
+A graph database, FalkorDB, stores the knowledge graph in three layers — text-grounded entity nodes, a causal DAG with typed edges (CAUSES, ENABLES, PREVENTS, HAPPENS_BEFORE), and a domain relationship taxonomy for narrative-specific analysis. NLP handles extraction. PostgreSQL handles documents and version history. The frontend is React and TypeScript with TipTap for the editor, ReactFlow for graph rendering, and D3 force layout for physics.
+
+The site is in early access currently. The interesting engineering problems have been developing an ontology for narrative modeling that is flexible so as to allow insight and viewing from many different perspectives. Future work includes:
+- greater levels of automation and customization
+- modular and progressive extraction and udpates
+- causal reasoning tools
+- ability to directly edit graph entities as a user
+- cross-document graph merging and overlays
+- a whole lot more`
+  },
+  {
     id: 0,
     type: 'project',
     title: "Overview Effect",
@@ -39,34 +67,6 @@ Live weather simulations display on the globe in different layers including:
 View the moon close up, with the earth sun and moon all in correct real-time relative positions and lighting.
 
 Stack: React 19, TypeScript, Three.js, @react-three/fiber, react-globe.gl, Vite. Server: Node.js with WebSocket relay.`
-  },
-  {
-    id: 1,
-    type: 'project',
-    title: "Noetic",
-    description: "Narrative intelligence for writers. Reads your manuscript, builds a knowledge graph of characters and events, and lets you navigate the structure through graph, timeline, and editor views.",
-    image: narrativeIntelligenceOdyssey2,
-    alt: 'A graph of all characters in the Odyssey and their relationships to each other',
-    link: 'https://writenoetic.com',
-    linkDisplayText: 'Visit Site',
-    expandable: true,
-    content: `Noetic is what I'm currently building — a narrative intelligence platform for writers working on complex, long-form, or nonlinear projects.
-
-This is based on my history as a writer and editor, and my experience with AI tools. It's becoming more possible now to work in a creative flow state, letting the AI handle structure and organization. But across large documents this work becomes more difficult quickly. And such tools are just not designed for writing and narrative work. As I explored what was possible, a whole spectrum of opportunities began opening up that I could only explore by building it.
-
-Start by uploading or pasting your text. A narrative analysis pipeline reads it, extracting every character, place, and event, anchoring each mention to an exact position in the text, and building a knowledge graph of how they connect. The model updates as you write.
-
-You view that model through a suite of synchronized views. In the text editor, entity names highlight in contextual colors — each character, place, and event tied to who they are in the graph. Switch to graph view and the same model renders as an interactive force-directed network. The timeline view is based on NLE (non-linear editor) interfaces you'd usually find in a DAW or video editing software. It displays the document or timeline horizontal tracks, showing events in the order they're written or in chronological order. Structures in the document and story are visible through different layers such as positional mentions, a semantic embedding similarity heat map, timelines and character arcs. Character portraits are generated with full awareness of the extracted character attributes — not a generic prompt, but one the system builds from what it's already read.
-
-A graph database, FalkorDB, stores the knowledge graph in three layers — text-grounded entity nodes, a causal DAG with typed edges (CAUSES, ENABLES, PREVENTS, HAPPENS_BEFORE), and a domain relationship taxonomy for narrative-specific analysis. NLP handles extraction. PostgreSQL handles documents and version history. The frontend is React and TypeScript with TipTap for the editor, ReactFlow for graph rendering, and D3 force layout for physics.
-
-The site is in early access currently. The interesting engineering problems have been developing an ontology for narrative modeling that is flexible so as to allow insight and viewing from many different perspectives. Future work includes:
-- greater levels of automation and customization
-- modular and progressive extraction and udpates
-- causal reasoning tools
-- ability to directly edit graph entities as a user
-- cross-document graph merging and overlays
-- a whole lot more`
   },
   {
     id: 2,
