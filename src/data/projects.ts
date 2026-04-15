@@ -42,7 +42,7 @@ The site is in early access currently. The interesting engineering problems have
     description: "Live lightning strikes on a 3D globe, powered by live weather data and physics-based simulations",
     image: overviewEffectScreenshot,
     alt: 'A 3D globe showing Earth from space with real-time lightning strike data',
-    link: 'https://overview-effect.io',
+    link: 'https://overview-effect.world',
     linkDisplayText: 'Visit Site',
     expandable: true,
     content: `Overview Effect is an exploration in learning about how complex natural phenomena actually work by simulating them. The initial focus was on simulating lightning through all phases:
