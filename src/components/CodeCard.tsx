@@ -41,7 +41,7 @@ const CodeCard = ({ project }: CodeCardProps) => {
               <span className="tracking-wide text-3xl md:text-5xl">{restOfTitle}</span>
             </h3>
           </div>
-          <div className="w-32 bg-gradient-to-r from-navy/80 to-transparent" />
+          <div className="w-32" style={{ background: 'linear-gradient(to right, rgb(13 20 25 / 0.8) 0%, rgb(13 20 25 / 0.72) 20%, rgb(13 20 25 / 0.5) 45%, rgb(13 20 25 / 0.2) 70%, transparent 100%)' }} />
         </div>
         <div className="bg-navy/80 pl-8 pr-6 pt-3 pb-4">
           <div className="flex items-center gap-4 ml-[0.15em]">
