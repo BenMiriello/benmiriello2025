@@ -16,6 +16,7 @@ export const projects: ProjectCard[] = [
     link: 'https://writenoetic.com',
     linkDisplayText: 'Visit Site',
     expandable: true,
+    wide: true,
     content: `Noetic is what I'm currently building — a narrative intelligence platform for writers working on complex, long-form, or nonlinear projects.
 
 This is based on my history as a writer and editor, and my experience with AI tools. It's becoming more possible now to work in a creative flow state, letting the AI handle structure and organization. But across large documents this work becomes more difficult quickly. And such tools are just not designed for writing and narrative work. As I explored what was possible, a whole spectrum of opportunities began opening up that I could only explore by building it.

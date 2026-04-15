@@ -9,6 +9,7 @@ export interface ProjectCard {
   linkDisplayText?: string;
   expandable?: boolean;
   content?: string;
+  wide?: boolean;
 }
 
 export interface PhotoInput {
