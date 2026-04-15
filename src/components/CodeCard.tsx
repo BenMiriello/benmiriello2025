@@ -34,12 +34,17 @@ const CodeCard = ({ project }: CodeCardProps) => {
       ></div>
 
       <div className="absolute bottom-0 left-0 right-0 z-20">
-        <div className="bg-stone-950/80 px-8 pb-4 pt-2">
-          <h3 className="text-white mb-4 leading-none">
-            <span className="major-mono-display-regular tracking-wider text-5xl md:text-7xl -mr-1 md:-mr-1.5">{firstLetter}</span>
-            <span className="tracking-wide text-3xl md:text-5xl">{restOfTitle}</span>
-          </h3>
-          <div className="flex items-center justify-between ml-[0.15em] md:ml-[0.15em]">
+        <div className="flex items-stretch">
+          <div className="bg-navy/80 pl-8 pr-8 pt-2 pb-1 whitespace-nowrap">
+            <h3 className="text-white leading-none">
+              <span className="major-mono-display-regular tracking-wider text-5xl md:text-7xl -mr-1 md:-mr-1.5">{firstLetter}</span>
+              <span className="tracking-wide text-3xl md:text-5xl">{restOfTitle}</span>
+            </h3>
+          </div>
+          <div className="w-32 bg-gradient-to-r from-navy/80 to-transparent" />
+        </div>
+        <div className="bg-navy/80 pl-8 pr-6 pt-3 pb-4">
+          <div className="flex items-center gap-4 ml-[0.15em]">
             {project.description && (
               <p className="text-white text-sm">{project.description}</p>
             )}
@@ -48,7 +53,7 @@ const CodeCard = ({ project }: CodeCardProps) => {
                 href={project.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-white text-sm font-medium hover:text-blue-300 active:text-blue-400 transition-colors duration-200 inline-flex items-center gap-1 ml-4 flex-shrink-0"
+                className="text-white text-sm font-medium hover:text-blue-300 active:text-blue-400 transition-colors duration-200 inline-flex items-center gap-1 flex-shrink-0"
                 onClick={(e) => e.stopPropagation()}
               >
                 {project.linkDisplayText || project.link}
