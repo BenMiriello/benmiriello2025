@@ -144,7 +144,10 @@ const ProjectOverlay = ({ projectId }: { projectId: string }) => {
 
     flipAnim.onfinish = null;
     flipAnim.reverse();
-    flipAnim.onfinish = () => navigate('/');
+    flipAnim.onfinish = () => {
+      panel.style.visibility = 'hidden';
+      navigate('/');
+    };
   };
 
   return (
