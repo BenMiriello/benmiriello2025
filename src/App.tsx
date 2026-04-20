@@ -7,7 +7,8 @@ import PhotoViewerPage from './pages/PhotoViewerPage';
 import PhotoAlbumPage from './pages/PhotoAlbumPage';
 import CodeProjectPage from './pages/CodeProjectPage';
 import type { NavigationSection } from './data/types';
-import { consumeOriginRect, setOriginRect } from './state/expandTransition';
+import { consumeOriginRect, setOriginRect, consumeOriginOverlayRect, setOriginOverlayRect } from './state/expandTransition';
+import { projects } from './data/projects';
 
 const ANIM_MS = 380;
 const CHILD_IN_MS = 240;
@@ -44,19 +45,40 @@ function animateChildrenClose(panel: HTMLDivElement): void {
 const ProjectOverlay = ({ projectId }: { projectId: string }) => {
   const navigate = useNavigate();
   const panelRef = useRef<HTMLDivElement>(null);
+  const ghostRef = useRef<HTMLDivElement>(null);
   const originRectRef = useRef<DOMRect | null>(null);
+  const overlayRectRef = useRef<DOMRect | null>(null);
   const flipAnimRef = useRef<Animation | null>(null);
+  const ghostAnimRef = useRef<Animation | null>(null);
   const childAnimsRef = useRef<Animation[]>([]);
   const [overlayVisible, setOverlayVisible] = useState(false);
 
+  const project = projects.find(p => p.id.toString() === projectId);
+  const firstLetter = project?.title.charAt(0) ?? '';
+  const restOfTitle = project?.title.slice(1) ?? '';
+
   useLayoutEffect(() => {
     const panel = panelRef.current;
+    const ghost = ghostRef.current;
     if (!panel) return;
 
     const originRect = consumeOriginRect();
     if (originRect) originRectRef.current = originRect;
 
-    // Always animate children regardless of whether we have a FLIP origin
+    const overlayRect = consumeOriginOverlayRect();
+    overlayRectRef.current = overlayRect;
+
+    if (ghost && overlayRect) {
+      ghost.style.top = overlayRect.top + 'px';
+      ghost.style.left = overlayRect.left + 'px';
+      ghost.style.width = overlayRect.width + 'px';
+      ghost.style.display = 'block';
+      ghostAnimRef.current = ghost.animate(
+        [{ transform: 'translateY(0)' }, { transform: 'translateY(100vh)' }],
+        { duration: ANIM_MS, easing: 'cubic-bezier(0.4, 0, 0.2, 1)', fill: 'forwards' }
+      );
+    }
+
     const childAnims = animateChildrenOpen(panel);
     childAnimsRef.current = childAnims;
     setOverlayVisible(true);
@@ -81,19 +103,22 @@ const ProjectOverlay = ({ projectId }: { projectId: string }) => {
 
     flipAnimRef.current = flipAnim;
 
-    // StrictMode cleanup: cancel animations and restore origin rect for second invocation
+    // StrictMode cleanup: cancel animations and restore state for second invocation
     return () => {
       flipAnim.cancel();
       childAnims.forEach(a => a.cancel());
       childAnimsRef.current = [];
+      ghostAnimRef.current?.cancel();
+      ghostAnimRef.current = null;
       if (originRectRef.current) setOriginRect(originRectRef.current);
+      if (overlayRectRef.current) setOriginOverlayRect(overlayRectRef.current);
     };
   }, []);
 
   const handleClose = () => {
     const panel = panelRef.current;
+    const ghost = ghostRef.current;
 
-    // Cancel open animations before starting close
     childAnimsRef.current.forEach(a => a.cancel());
     childAnimsRef.current = [];
     setOverlayVisible(false);
@@ -101,6 +126,15 @@ const ProjectOverlay = ({ projectId }: { projectId: string }) => {
     if (!panel) { navigate('/'); return; }
 
     animateChildrenClose(panel);
+
+    if (ghost && overlayRectRef.current) {
+      ghost.style.display = 'block';
+      ghostAnimRef.current?.cancel();
+      ghostAnimRef.current = ghost.animate(
+        [{ transform: 'translateY(100vh)' }, { transform: 'translateY(0)' }],
+        { duration: ANIM_MS, easing: 'cubic-bezier(0.4, 0, 0.2, 1)', fill: 'forwards' }
+      );
+    }
 
     const flipAnim = flipAnimRef.current;
     if (!flipAnim) {
@@ -125,6 +159,28 @@ const ProjectOverlay = ({ projectId }: { projectId: string }) => {
         className="absolute inset-4 z-50 flex flex-col rounded-xl overflow-hidden shadow-2xl"
       >
         <CodeProjectPage projectId={projectId} onClose={handleClose} />
+      </div>
+      {/* Ghost card bottom bar — position:fixed, slides out of viewport on open, back on close */}
+      <div
+        ref={ghostRef}
+        style={{ display: 'none', position: 'fixed', pointerEvents: 'none', zIndex: 60 }}
+      >
+        <div>
+          <div className="flex items-stretch">
+            <div className="bg-navy/80 pl-8 pr-8 pt-2 pb-1 whitespace-nowrap">
+              <h3 className="text-white leading-none">
+                <span className="major-mono-display-regular tracking-wider text-[2.75rem] md:text-[3.75rem] -mr-1 md:-mr-1.5">{firstLetter}</span>
+                <span className="tracking-wide text-[1.75rem] md:text-[2.75rem]">{restOfTitle}</span>
+              </h3>
+            </div>
+            <div className="w-32" style={{ background: 'linear-gradient(to right, rgb(13 20 25 / 0.8) 0%, rgb(13 20 25 / 0.72) 20%, rgb(13 20 25 / 0.5) 45%, rgb(13 20 25 / 0.2) 70%, transparent 100%)' }} />
+          </div>
+          {project?.description && (
+            <div className="bg-navy/80 pl-8 pr-6 pt-3 pb-4">
+              <p className="text-white text-sm ml-[0.15em]">{project.description}</p>
+            </div>
+          )}
+        </div>
       </div>
     </>
   );
