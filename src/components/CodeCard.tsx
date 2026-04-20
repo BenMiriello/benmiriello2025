@@ -1,5 +1,7 @@
+import { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import type { ProjectCard } from '../data/types';
+import { setOriginRect } from '../state/expandTransition';
 
 interface CodeCardProps {
   project: ProjectCard;
@@ -7,17 +9,21 @@ interface CodeCardProps {
 
 const CodeCard = ({ project }: CodeCardProps) => {
   const navigate = useNavigate();
+  const cardRef = useRef<HTMLDivElement>(null);
   const firstLetter = project.title.charAt(0);
   const restOfTitle = project.title.slice(1);
 
   const handleClick = () => {
     if (project.expandable) {
+      const rect = cardRef.current?.getBoundingClientRect();
+      if (rect) setOriginRect(rect);
       navigate(`/code/${project.id}`);
     }
   };
 
   return (
     <div
+      ref={cardRef}
       className={`rounded-xl shadow-md flex-shrink-0 w-full h-80 md:h-auto hover:scale-102 transition-all relative overflow-hidden bg-stone-500 ${project.wide ? 'md:w-[72rem] md:aspect-[16/9]' : 'md:w-[52rem] md:aspect-[5/4]'} ${project.expandable ? 'cursor-pointer' : ''}`}
       style={{
         backgroundImage: project.image ? `url(${project.image})` : undefined,

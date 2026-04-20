@@ -10,7 +10,7 @@ export const projects: ProjectCard[] = [
     id: 1,
     type: 'project',
     title: "Noetic",
-    description: "Narrative intelligence for writers. Reads your manuscript, builds a knowledge graph of characters and events, and lets you navigate the structure through graph, timeline, and editor views.",
+    description: "A graph intelligence platform across several domains, starting with writers and creators. AI-driven construction of a knowledge graph out of unstructured text, with graph, timeline, and editor views. Context-aware image generation for characters and scenes.",
     image: narrativeIntelligenceOdyssey2,
     alt: 'A graph of all characters in the Odyssey and their relationships to each other',
     link: 'https://writenoetic.com',
