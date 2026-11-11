@@ -1,35 +1,33 @@
 import { useEffect, useRef, useState } from 'react';
 import type { CardVideo as CardVideoData } from '../data/types';
 
-type NavigatorWithConnection = Navigator & { connection?: { saveData?: boolean } };
-
-const shouldPlayVideo = () =>
-  !window.matchMedia('(prefers-reduced-motion: reduce)').matches &&
-  !(navigator as NavigatorWithConnection).connection?.saveData;
-
 interface CardVideoProps {
   video: CardVideoData;
+  loop: boolean;
+  playing: boolean;
+  onEnded?: () => void;
+  onFail: () => void;
 }
 
-// Renders nothing when video is unwanted or unplayable, leaving the card's background image as the fallback.
-const CardVideo = ({ video }: CardVideoProps) => {
+const CardVideo = ({ video, loop, playing, onEnded, onFail }: CardVideoProps) => {
   const ref = useRef<HTMLVideoElement>(null);
-  const [enabled] = useState(shouldPlayVideo);
-  const [failed, setFailed] = useState(false);
+  const [visible, setVisible] = useState(false);
 
-  // preload="none" plus viewport-driven play() means bytes are only fetched while the card is on screen.
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-    const observer = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting) el.play().catch(() => {});
-      else el.pause();
-    }, { threshold: 0.1 });
+    const observer = new IntersectionObserver(([entry]) => setVisible(entry.isIntersecting), { threshold: 0.1 });
     observer.observe(el);
     return () => observer.disconnect();
-  }, [enabled, failed]);
+  }, []);
 
-  if (!enabled || failed) return null;
+  // preload="none" plus play() gated on visibility means bytes are only fetched while the video is on screen.
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    if (playing && visible) el.play().catch(() => {});
+    else el.pause();
+  }, [playing, visible]);
 
   const last = video.sources.length - 1;
   return (
@@ -38,16 +36,17 @@ const CardVideo = ({ video }: CardVideoProps) => {
       className="absolute inset-0 w-full h-full object-cover"
       poster={video.poster}
       muted
-      loop
+      loop={loop}
       playsInline
       preload="none"
       aria-hidden="true"
+      onEnded={onEnded}
       // React propagates <source> errors here, including harmless ones for sources skipped by their media query.
-      onError={(e) => { if (e.target === e.currentTarget) setFailed(true); }}
+      onError={(e) => { if (e.target === e.currentTarget) onFail(); }}
     >
       {video.sources.map((s, i) => (
         // A media element reports "no playable source" only via an error on its final <source>.
-        <source key={s.src} src={s.src} type={s.type} media={s.media} onError={i === last ? () => setFailed(true) : undefined} />
+        <source key={s.src} src={s.src} type={s.type} media={s.media} onError={i === last ? onFail : undefined} />
       ))}
     </video>
   );

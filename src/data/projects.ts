@@ -1,4 +1,4 @@
-import type { ProjectCard } from './types';
+import type { CardVideo, CarouselImage, ProjectCard } from './types';
 import grabMeetingCollage from '../assets/grabameetingcollage.webp';
 import riddlemethisBG from '../assets/riddlemethis-screenshot.webp';
 import storymarkBG from '../assets/storymark-bg.webp';
@@ -11,6 +11,23 @@ import overviewEffectAv1_720 from '../assets/video/overview-effect-av1-720.mp4';
 import overviewEffectHevc1080 from '../assets/video/overview-effect-hevc-1080.mp4';
 import overviewEffectHevc720 from '../assets/video/overview-effect-hevc-720.mp4';
 import overviewEffectPoster from '../assets/video/overview-effect-poster.webp';
+import overviewEffectWindAv1_1080 from '../assets/video/overview-effect-wind-av1-1080.mp4';
+import overviewEffectWindAv1_720 from '../assets/video/overview-effect-wind-av1-720.mp4';
+import overviewEffectWindHevc1080 from '../assets/video/overview-effect-wind-hevc-1080.mp4';
+import overviewEffectWindHevc720 from '../assets/video/overview-effect-wind-hevc-720.mp4';
+import overviewEffectWindPoster from '../assets/video/overview-effect-wind-poster.webp';
+
+// Sources are tried in order: AV1 first for size, HEVC for Safari on hardware without AV1 decode.
+// Codec strings assume 8-bit Main profile at 60fps: level 4.1 for 1080p, 4.0 for 720p.
+const encodedVideo = (poster: string, av1_1080: string, av1_720: string, hevc1080: string, hevc720: string): CardVideo => ({
+  poster,
+  sources: [
+    { src: av1_1080, type: 'video/mp4; codecs="av01.0.09M.08"', media: '(min-width: 768px)' },
+    { src: av1_720, type: 'video/mp4; codecs="av01.0.08M.08"' },
+    { src: hevc1080, type: 'video/mp4; codecs="hvc1.1.6.L123.B0"', media: '(min-width: 768px)' },
+    { src: hevc720, type: 'video/mp4; codecs="hvc1.1.6.L120.B0"' },
+  ],
+});
 
 export const projects: ProjectCard[] = [
   {
@@ -20,16 +37,19 @@ export const projects: ProjectCard[] = [
     description: "Live lightning strikes on a 3D globe, powered by live weather data and physics-based simulations",
     image: overviewEffectScreenshot,
     alt: 'A 3D globe showing Earth from space with real-time lightning strike data',
-    // Sources are tried in order: AV1 first for size, HEVC for Safari on hardware without AV1 decode.
-    video: {
-      poster: overviewEffectPoster,
-      sources: [
-        { src: overviewEffectAv1_1080, type: 'video/mp4; codecs="av01.0.09M.08"', media: '(min-width: 768px)' },
-        { src: overviewEffectAv1_720, type: 'video/mp4; codecs="av01.0.08M.08"' },
-        { src: overviewEffectHevc1080, type: 'video/mp4; codecs="hvc1.1.6.L123.B0"', media: '(min-width: 768px)' },
-        { src: overviewEffectHevc720, type: 'video/mp4; codecs="hvc1.1.6.L120.B0"' },
-      ],
-    },
+    images: [
+      {
+        src: overviewEffectScreenshot,
+        alt: 'A tour of Mars, Phobos, the Sun across several wavelengths, and Earth down to its mountain ranges',
+        video: encodedVideo(overviewEffectPoster, overviewEffectAv1_1080, overviewEffectAv1_720, overviewEffectHevc1080, overviewEffectHevc720),
+      },
+      {
+        src: overviewEffectWindPoster,
+        alt: 'Live global wind speeds animated as streamlines over a 3D Earth',
+        video: encodedVideo(overviewEffectWindPoster, overviewEffectWindAv1_1080, overviewEffectWindAv1_720, overviewEffectWindHevc1080, overviewEffectWindHevc720),
+      },
+    ],
+    carousel: { autoCycle: true, showDots: true },
     link: 'https://overview-effect.benmiriello.com',
     linkDisplayText: 'Visit Site',
     expandable: true,
@@ -149,3 +169,6 @@ Built with modern web technologies, it provides an intuitive way to create and s
 Key features include declarative syntax, component-based architecture, and instant preview capabilities.`
   },
 ];
+
+export const projectSlides = (project: ProjectCard): CarouselImage[] =>
+  project.images?.length ? project.images : [{ src: project.image, alt: project.alt }];

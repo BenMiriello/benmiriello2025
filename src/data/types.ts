@@ -1,6 +1,7 @@
 export interface CarouselImage {
   src: string;
   alt?: string;
+  video?: CardVideo;
 }
 
 export interface CarouselConfig {
@@ -29,7 +30,6 @@ export interface ProjectCard {
   alt?: string;
   images?: CarouselImage[];
   carousel?: CarouselConfig;
-  video?: CardVideo;
   link?: string;
   linkDisplayText?: string;
   expandable?: boolean;

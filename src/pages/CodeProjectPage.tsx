@@ -1,5 +1,8 @@
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { projects } from '../data/projects';
+import { projects, projectSlides } from '../data/projects';
+import ImageCarousel from '../components/ImageCarousel';
+import CarouselDots from '../components/CarouselDots';
 
 interface CodeProjectPageProps {
   projectId: string;
@@ -8,6 +11,7 @@ interface CodeProjectPageProps {
 
 const CodeProjectPage = ({ projectId, onClose }: CodeProjectPageProps) => {
   const navigate = useNavigate();
+  const [activeIndex, setActiveIndex] = useState(0);
 
   const project = projects.find(p => p.id.toString() === projectId);
 
@@ -16,6 +20,7 @@ const CodeProjectPage = ({ projectId, onClose }: CodeProjectPageProps) => {
     return null;
   }
 
+  const slides = projectSlides(project);
   const firstLetter = project.title.charAt(0);
   const restOfTitle = project.title.slice(1);
   const handleClose = onClose ?? (() => navigate('/'));
@@ -61,7 +66,20 @@ const CodeProjectPage = ({ projectId, onClose }: CodeProjectPageProps) => {
         </div>
 
         {/* Scrollable content — fades + slides up on open, down on close */}
-        <div data-content className="flex-1 overflow-y-auto px-8 py-6">
+        <div data-content className="flex-1 overflow-y-auto px-4 md:px-8 py-6">
+          <div className="max-w-5xl mx-auto mb-6 relative aspect-video rounded-lg overflow-hidden bg-stone-900" role="img" aria-label={slides[activeIndex]?.alt || project.title}>
+            <ImageCarousel
+              images={slides}
+              activeIndex={activeIndex}
+              onChange={setActiveIndex}
+              autoCycle={project.carousel?.autoCycle ?? false}
+              intervalMs={project.carousel?.intervalMs ?? 5000}
+              playing
+            />
+            {slides.length > 1 && project.carousel?.showDots !== false && (
+              <CarouselDots count={slides.length} activeIndex={activeIndex} onChange={setActiveIndex} className="absolute bottom-0 left-0 right-0 z-10 pb-1" />
+            )}
+          </div>
           {project.content && (
             <div className="max-w-4xl mx-auto text-stone-200 leading-relaxed whitespace-pre-wrap">
               {project.content}
