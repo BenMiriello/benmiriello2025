@@ -6,6 +6,11 @@ import narrativeIntelligenceOdyssey2 from '../assets/narrative-intelligence-odys
 import overviewEffectScreenshot from '../assets/overview-effect-screenshot.webp';
 import workshopHealthChat1 from '../assets/workshop-health-chat-1.webp';
 import workshopBirds1 from '../assets/workshop-birds-1.webp';
+import overviewEffectAv1_1080 from '../assets/video/overview-effect-av1-1080.mp4';
+import overviewEffectAv1_720 from '../assets/video/overview-effect-av1-720.mp4';
+import overviewEffectHevc1080 from '../assets/video/overview-effect-hevc-1080.mp4';
+import overviewEffectHevc720 from '../assets/video/overview-effect-hevc-720.mp4';
+import overviewEffectPoster from '../assets/video/overview-effect-poster.webp';
 
 export const projects: ProjectCard[] = [
   {
@@ -15,6 +20,16 @@ export const projects: ProjectCard[] = [
     description: "Live lightning strikes on a 3D globe, powered by live weather data and physics-based simulations",
     image: overviewEffectScreenshot,
     alt: 'A 3D globe showing Earth from space with real-time lightning strike data',
+    // Sources are tried in order: AV1 first for size, HEVC for Safari on hardware without AV1 decode.
+    video: {
+      poster: overviewEffectPoster,
+      sources: [
+        { src: overviewEffectAv1_1080, type: 'video/mp4; codecs="av01.0.09M.08"', media: '(min-width: 768px)' },
+        { src: overviewEffectAv1_720, type: 'video/mp4; codecs="av01.0.08M.08"' },
+        { src: overviewEffectHevc1080, type: 'video/mp4; codecs="hvc1.1.6.L123.B0"', media: '(min-width: 768px)' },
+        { src: overviewEffectHevc720, type: 'video/mp4; codecs="hvc1.1.6.L120.B0"' },
+      ],
+    },
     link: 'https://overview-effect.benmiriello.com',
     linkDisplayText: 'Visit Site',
     expandable: true,

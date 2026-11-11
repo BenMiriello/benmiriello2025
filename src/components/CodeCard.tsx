@@ -2,6 +2,7 @@ import { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import type { ProjectCard } from '../data/types';
 import ImageCarousel from './ImageCarousel';
+import CardVideo from './CardVideo';
 import { setOriginRect, setOriginOverlayRect } from '../state/expandTransition';
 
 interface CodeCardProps {
@@ -51,6 +52,7 @@ const CodeCard = ({ project }: CodeCardProps) => {
           intervalMs={carousel?.intervalMs ?? 5000}
         />
       )}
+      {project.video && <CardVideo video={project.video} />}
       <div
         className={`absolute inset-0 bg-black z-10 ${project.expandable ? 'cursor-pointer' : ''}`}
         style={{ opacity: 0 }}

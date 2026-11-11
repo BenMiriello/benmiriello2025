@@ -1,1 +1,2 @@
 - never just run 'npm run dev' - always use your own port when running the server so as to not interfere with my server running - pick one 5 more than whatever the automatic server port number is
+- deploys: Cloudflare Pages project `benmiriello2025`, git-connected. The `production` branch is the live site (benmiriello.com); pushes to `main` only build a preview at main.benmiriello2025.pages.dev. To go live, fast-forward `production` to `main` (`git push origin main:production`).

@@ -9,6 +9,17 @@ export interface CarouselConfig {
   showDots?: boolean;
 }
 
+export interface VideoSource {
+  src: string;
+  type: string;
+  media?: string;
+}
+
+export interface CardVideo {
+  sources: VideoSource[];
+  poster: string;
+}
+
 export interface ProjectCard {
   id: number | string;
   type: 'project';
@@ -18,6 +29,7 @@ export interface ProjectCard {
   alt?: string;
   images?: CarouselImage[];
   carousel?: CarouselConfig;
+  video?: CardVideo;
   link?: string;
   linkDisplayText?: string;
   expandable?: boolean;
