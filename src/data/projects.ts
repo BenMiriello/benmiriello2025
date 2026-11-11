@@ -1,9 +1,11 @@
 import type { ProjectCard } from './types';
-import grabMeetingCollage from '../assets/grabameetingcollage.jpg';
-import riddlemethisBG from '../assets/riddlemethis-screenshot.png';
-import storymarkBG from '../assets/storymark-bg.png';
-import narrativeIntelligenceOdyssey2 from '../assets/narrative-intelligence-odyssey-2.png';
-import overviewEffectScreenshot from '../assets/overview-effect-screenshot.png';
+import grabMeetingCollage from '../assets/grabameetingcollage.webp';
+import riddlemethisBG from '../assets/riddlemethis-screenshot.webp';
+import storymarkBG from '../assets/storymark-bg.webp';
+import narrativeIntelligenceOdyssey2 from '../assets/narrative-intelligence-odyssey-2.webp';
+import overviewEffectScreenshot from '../assets/overview-effect-screenshot.webp';
+import workshopHealthChat1 from '../assets/workshop-health-chat-1.webp';
+import workshopBirds1 from '../assets/workshop-birds-1.webp';
 
 export const projects: ProjectCard[] = [
   {
@@ -39,6 +41,22 @@ Live weather simulations display on the globe in different layers including:
 View the moon close up, with the earth sun and moon all in correct real-time relative positions and lighting.
 
 Stack: React 19, TypeScript, Three.js, @react-three/fiber, react-globe.gl, Vite. Server: Node.js with WebSocket relay.`
+  },
+  {
+    id: 5,
+    type: 'project',
+    title: "Workshop",
+    description: "An integrated assistant, agent, development, and hosting platform",
+    image: workshopHealthChat1,
+    alt: "A screenshot of a chat interface showing a discussion about updating a project, with an app toolbar on the left.",
+    images: [
+      { src: workshopBirds1, alt: "A screenshot of a bird-themed project built in Workshop." },
+      { src: workshopHealthChat1, alt: "A screenshot of a chat interface showing a discussion about updating a project, with an app toolbar on the left." },
+    ],
+    carousel: { autoCycle: true, intervalMs: 6000, showDots: true },
+    expandable: true,
+    wide: true,
+    content: ``
   },
   {
     id: 1,

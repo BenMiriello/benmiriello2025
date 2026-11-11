@@ -1,6 +1,7 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import type { ProjectCard } from '../data/types';
+import ImageCarousel from './ImageCarousel';
 import { setOriginRect, setOriginOverlayRect } from '../state/expandTransition';
 
 interface CodeCardProps {
@@ -13,6 +14,10 @@ const CodeCard = ({ project }: CodeCardProps) => {
   const overlayRef = useRef<HTMLDivElement>(null);
   const firstLetter = project.title.charAt(0);
   const restOfTitle = project.title.slice(1);
+  const slides = project.images?.length ? project.images : null;
+  const [activeIndex, setActiveIndex] = useState(0);
+  const carousel = project.carousel;
+  const showDots = !!slides && slides.length > 1 && carousel?.showDots !== false;
 
   const handleClick = () => {
     if (project.expandable) {
@@ -28,21 +33,46 @@ const CodeCard = ({ project }: CodeCardProps) => {
     <div
       ref={cardRef}
       className={`rounded-xl shadow-md flex-shrink-0 w-full h-80 md:h-auto hover:scale-102 transition-all relative overflow-hidden bg-stone-500 ${project.wide ? 'md:w-[72rem] md:aspect-[16/9]' : 'md:w-[52rem] md:aspect-[5/4]'}`}
-      style={{
+      style={slides ? undefined : {
         backgroundImage: project.image ? `url(${project.image})` : undefined,
         backgroundSize: 'cover',
         backgroundPosition: 'center'
       }}
       role="img"
-      aria-label={project.alt || project.title || 'Code project card background image'}
+      aria-label={(slides?.[activeIndex]?.alt ?? project.alt) || project.title || 'Code project card background image'}
       onClick={handleClick}
     >
+      {slides && (
+        <ImageCarousel
+          images={slides}
+          activeIndex={activeIndex}
+          onChange={setActiveIndex}
+          autoCycle={carousel?.autoCycle ?? false}
+          intervalMs={carousel?.intervalMs ?? 5000}
+        />
+      )}
       <div
         className={`absolute inset-0 bg-black z-10 ${project.expandable ? 'cursor-pointer' : ''}`}
         style={{ opacity: 0 }}
       />
 
       <div ref={overlayRef} className="absolute bottom-0 left-0 right-0 z-20 cursor-default">
+        {showDots && (
+          <div className="absolute bottom-full left-0 right-0 flex justify-center pb-1">
+            {slides!.map((_, i) => (
+              <button
+                key={i}
+                type="button"
+                aria-label={`Show image ${i + 1} of ${slides!.length}`}
+                aria-current={i === activeIndex}
+                className="group p-2.5 cursor-pointer"
+                onClick={(e) => { e.stopPropagation(); setActiveIndex(i); }}
+              >
+                <span className={`block w-2.5 h-2.5 rounded-full border border-white/80 shadow transition-colors ${i === activeIndex ? 'bg-white' : 'bg-white/30 group-hover:bg-white/60'}`} />
+              </button>
+            ))}
+          </div>
+        )}
         <div className="flex items-stretch">
           <div className="bg-navy/80 pl-8 pr-8 pt-2 pb-1 whitespace-nowrap">
             <h3 className={`text-white leading-none ${project.expandable ? 'cursor-pointer' : ''}`}>

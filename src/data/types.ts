@@ -1,3 +1,14 @@
+export interface CarouselImage {
+  src: string;
+  alt?: string;
+}
+
+export interface CarouselConfig {
+  autoCycle?: boolean;
+  intervalMs?: number;
+  showDots?: boolean;
+}
+
 export interface ProjectCard {
   id: number | string;
   type: 'project';
@@ -5,6 +16,8 @@ export interface ProjectCard {
   description: string;
   image: string;
   alt?: string;
+  images?: CarouselImage[];
+  carousel?: CarouselConfig;
   link?: string;
   linkDisplayText?: string;
   expandable?: boolean;
