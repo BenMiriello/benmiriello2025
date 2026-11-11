@@ -16,6 +16,11 @@ import overviewEffectWindAv1_720 from '../assets/video/overview-effect-wind-av1-
 import overviewEffectWindHevc1080 from '../assets/video/overview-effect-wind-hevc-1080.mp4';
 import overviewEffectWindHevc720 from '../assets/video/overview-effect-wind-hevc-720.mp4';
 import overviewEffectWindPoster from '../assets/video/overview-effect-wind-poster.webp';
+import overviewEffectLightningAv1_1080 from '../assets/video/overview-effect-lightning-av1-1080.mp4';
+import overviewEffectLightningAv1_720 from '../assets/video/overview-effect-lightning-av1-720.mp4';
+import overviewEffectLightningHevc1080 from '../assets/video/overview-effect-lightning-hevc-1080.mp4';
+import overviewEffectLightningHevc720 from '../assets/video/overview-effect-lightning-hevc-720.mp4';
+import overviewEffectLightningPoster from '../assets/video/overview-effect-lightning-poster.webp';
 
 // Sources are tried in order: AV1 first for size, HEVC for Safari on hardware without AV1 decode.
 // Codec strings assume 8-bit Main profile at 60fps: level 4.1 for 1080p, 4.0 for 720p.
@@ -47,6 +52,11 @@ export const projects: ProjectCard[] = [
         src: overviewEffectWindPoster,
         alt: 'Live global wind speeds animated as streamlines over a 3D Earth',
         video: encodedVideo(overviewEffectWindPoster, overviewEffectWindAv1_1080, overviewEffectWindAv1_720, overviewEffectWindHevc1080, overviewEffectWindHevc720),
+      },
+      {
+        src: overviewEffectLightningPoster,
+        alt: 'Diving from orbit into a storm to watch simulated lightning strikes from inside the cloud layer',
+        video: encodedVideo(overviewEffectLightningPoster, overviewEffectLightningAv1_1080, overviewEffectLightningAv1_720, overviewEffectLightningHevc1080, overviewEffectLightningHevc720),
       },
     ],
     carousel: { autoCycle: true, showDots: true },
@@ -89,6 +99,8 @@ Stack: React 19, TypeScript, Three.js, @react-three/fiber, react-globe.gl, Vite.
       { src: workshopHealthChat1, alt: "A screenshot of a chat interface showing a discussion about updating a project, with an app toolbar on the left." },
     ],
     carousel: { autoCycle: true, intervalMs: 6000, showDots: true },
+    link: 'https://github.com/benmiriello/workshop',
+    linkDisplayText: 'Visit Site',
     expandable: true,
     wide: true,
     content: ``
